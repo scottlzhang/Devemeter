@@ -1,0 +1,16 @@
+[
+  { "keys": ["enter"],
+    "command": "enter",
+    "context": [{
+      "key": "selector",
+      "match_all": true
+    }]
+  },
+  { "keys": ["bk"],
+    "command": "backspace",
+    "context": [{
+      "key": "selector",
+      "match_all": true
+    }]
+  }
+]
