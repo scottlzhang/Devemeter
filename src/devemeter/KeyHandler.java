@@ -17,6 +17,7 @@ import org.apache.catalina.websocket.*;
 public class KeyHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	WsOutbound myoutbound;
+	public static int count=0;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -40,7 +41,8 @@ public class KeyHandler extends HttpServlet {
 		String key=request.getParameter("key");
 		response.getWriter().write(key+" received! Got it!");
 		
-		WsHandler.pushMsg("hi");
+		count++;
+		WsHandler.pushMsg("Greetings! You've pushed enter key "+count+" times!");
 		
 		//WsHandler ws=new WsHandler();
 		
