@@ -5,8 +5,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+ <script type="text/javascript">
+   var ws = new WebSocket("ws://localhost:8080/Devemeter/WsHandler");
+   ws.onopen = function () {
+   };
+
+      ws.onmessage = function(message) {
+    document.getElementById("msgArea").textContent += message.data + "\n";               
+      };
+
+      function postToServer() {
+    ws.send(document.getElementById("msg").value);
+    document.getElementById("msg").value = "";
+   }
+
+   function closeConnect() {
+    ws.close();
+   }
+  </script>
+  
 </head>
 <body>
-<h1><%=request.getAttribute("p") %></h1>
+    <div>
+  <textarea rows="4" cols="100" id="msgArea" readonly></textarea>
+  </div>
+  <div>
+  <input id="msg" type="text"/>
+  <button type="submit" id="sendButton" onclick="postToServer()">Send</button>
+  </div>
 </body>
 </html>
