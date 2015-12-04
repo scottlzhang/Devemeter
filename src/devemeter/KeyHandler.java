@@ -1,6 +1,7 @@
 package devemeter;
 
 import java.io.IOException;
+import java.sql.*;
 import java.nio.CharBuffer;
 
 import javax.servlet.ServletException;
@@ -17,12 +18,15 @@ import org.apache.catalina.websocket.*;
 public class KeyHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	WsOutbound myoutbound;
+	private DbHandler db;
+	
 	public static int count=0;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public KeyHandler() {
         super();
+        db=new DbHandler();
         // TODO Auto-generated constructor stub
     }
 
@@ -43,7 +47,7 @@ public class KeyHandler extends HttpServlet {
 		
 		count++;
 		WsHandler.pushMsg("Greetings! You've pushed enter key "+count+" times!");
-		
+		db.addLine(1,1,151201);
 		//WsHandler ws=new WsHandler();
 		
 		//clients=ws.clients;
