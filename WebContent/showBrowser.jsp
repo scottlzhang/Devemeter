@@ -28,6 +28,7 @@
 </head>
 <body>
     <div>
+    Wanqing
   <textarea rows="4" cols="100" id="msgArea" readonly></textarea>
   </div>
   <div>
