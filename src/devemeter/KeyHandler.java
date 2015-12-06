@@ -46,8 +46,10 @@ public class KeyHandler extends HttpServlet {
 		response.getWriter().write(key+" received! Got it!");
 		
 		count++;
+		
 		WsHandler.pushMsg("Greetings! You've pushed enter key "+count+" times!");
-		db.addLine(1,1,151201);
+		
+		
 		//WsHandler ws=new WsHandler();
 		
 		//clients=ws.clients;

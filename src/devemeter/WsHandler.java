@@ -45,12 +45,11 @@ public class WsHandler extends WebSocketServlet {
 	
 	public static void pushMsg(String msg) {
 		Enumeration<String> keys=clients.keys();
+		System.out.println("client number: "+clients.size());
 		while (keys.hasMoreElements()) {
 			MyInBound c=(MyInBound) clients.get(keys.nextElement());
 			c.writeMsg(msg);
-			
 		}
-		
 	}
 	
 	 public void addClient(String sessionId, StreamInbound streamInBound) {
