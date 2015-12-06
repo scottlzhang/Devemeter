@@ -2,6 +2,7 @@ package devemeter;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.List;
 import java.nio.CharBuffer;
 
 import javax.servlet.ServletException;
@@ -47,7 +48,9 @@ public class KeyHandler extends HttpServlet {
 		
 		count++;
 		WsHandler.pushMsg("Greetings! You've pushed enter key "+count+" times!");
-		db.addLine(1,1,151201);
+		//db.removeLine(1,1,151201,1);
+		List<Integer> list=db.getLanguages(1);
+		System.out.println(list);
 		//WsHandler ws=new WsHandler();
 		
 		//clients=ws.clients;

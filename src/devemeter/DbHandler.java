@@ -1,5 +1,6 @@
 package devemeter;
 import java.sql.*;
+import java.util.*;
 
 public class DbHandler {
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -35,13 +36,158 @@ public class DbHandler {
 			return result;
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		} catch(Exception e){
 		      //Handle errors for Class.forName
 		      e.printStackTrace();
 		      return -1;
+		}
+	}
+	
+	public int removeLine(int uid, int lang_code, int date, int count){
+		try {
+			stmt=conn.createStatement();
+			String sql="UPDATE userlog SET line_count=line_count-? WHERE uid=? AND lang_code=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, count);
+			pstmt.setInt(2, uid);
+			pstmt.setInt(3, lang_code);
+			int result=pstmt.executeUpdate();
+			return result;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		} catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		      return -1;
+		}
+	}
+	
+	public int getLineCount(int uid, int lang_code, int date){
+		try {
+			stmt=conn.createStatement();
+			String sql="SELECT line_count from userlog WHERE uid=? AND lang_code=? AND date=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			pstmt.setInt(2, lang_code);
+			pstmt.setInt(3, date);
+			ResultSet result=pstmt.executeQuery();
+			int count=0;
+			while(result.next()){
+				count=result.getInt(1);
+			}
+			return count;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		} catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		      return -1;
+		}
+	}
+
+	public int getLineCount(int uid, int lang_code, int start_date, int end_date){
+		try {
+			stmt=conn.createStatement();
+			String sql="SELECT SUM(line_count) from userlog WHERE uid=? AND lang_code=? AND date>=? AND date<=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			pstmt.setInt(2, lang_code);
+			pstmt.setInt(3, start_date);
+			pstmt.setInt(4, end_date);
+			ResultSet result=pstmt.executeQuery();
+			int count=0;
+			while(result.next()){
+				count=result.getInt(1);
+			}
+			return count;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		} catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		      return -1;
+		}
+	}
+	
+	public int getWordCount(int uid, int lang_code, int date){
+		try {
+			stmt=conn.createStatement();
+			String sql="SELECT word_count from userlog WHERE uid=? AND lang_code=? AND date=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			pstmt.setInt(2, lang_code);
+			pstmt.setInt(3, date);
+			ResultSet result=pstmt.executeQuery();
+			int count=0;
+			while(result.next()){
+				count=result.getInt(1);
+			}
+			return count;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		} catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		      return -1;
+		}
+	}
+	
+	public int getWordCount(int uid, int lang_code, int start_date, int end_date){
+		try {
+			stmt=conn.createStatement();
+			String sql="SELECT SUM(word_count) from userlog WHERE uid=? AND lang_code=? AND date>=? AND date<=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			pstmt.setInt(2, lang_code);
+			pstmt.setInt(3, start_date);
+			pstmt.setInt(4, end_date);
+			ResultSet result=pstmt.executeQuery();
+			int count=0;
+			while(result.next()){
+				count=result.getInt(1);
+			}
+			return count;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		} catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		      return -1;
+		}
+	}
+	
+	public List<Integer> getLanguages(int uid){
+		try {
+			stmt=conn.createStatement();
+			String sql="SELECT DISTINCT lang_code from userlog WHERE uid=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			ResultSet result=pstmt.executeQuery();
+			List<Integer> list=new ArrayList<Integer>();
+			while(result.next()){
+				list.add(result.getInt(1));
+			}
+			return list;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ArrayList<Integer>();
+		} catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		      return new ArrayList<Integer>();
 		}
 	}
 
