@@ -81,7 +81,7 @@ public class KeyHandler extends HttpServlet {
 		//System.out.println(list);
 		
 		//WsHandler ws=new WsHandler();
-		db.addLine(uid, lang_code, today);
+		//db.getLineTrend(uid, lang_code, 151201,1512);
 		GetGeneralData d=new GetGeneralData();
 		WsHandler.pushMsg(d.getData(uid, today, today));
 		//clients=ws.clients;
