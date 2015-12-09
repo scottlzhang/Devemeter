@@ -72,6 +72,11 @@ public class KeyHandler extends HttpServlet {
 		int uid=Integer.parseInt(request.getParameter("uid"));
 		String key=request.getParameter("key");
 		String ftype=request.getParameter("ftype");
+		String le=request.getParameter("lineErased");
+		int lineErased=0;
+		if (le!=null) {
+			lineErased=Integer.parseInt(request.getParameter("lineErased"));
+		}
 		int lang_code=getLangCode(ftype);
 		//response.getWriter().write(key+" received! Got it! Lang code: "+);
 		
@@ -81,7 +86,11 @@ public class KeyHandler extends HttpServlet {
 		//System.out.println(list);
 		
 		//WsHandler ws=new WsHandler();
-		db.addLine(uid, lang_code, today);
+		if (key.equals("enter")) {
+			db.addLine(uid, lang_code, today);
+		} else if (key.equals("backspace")) {
+			db.removeLine(uid, lang_code, today, lineErased);
+		}
 		GetGeneralData d=new GetGeneralData();
 		WsHandler.pushMsg(d.getData(uid, today, today));
 		//clients=ws.clients;

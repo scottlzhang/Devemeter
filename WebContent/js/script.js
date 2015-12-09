@@ -63,7 +63,7 @@ function trendJsonConversion(str) {
 	return lineData;
 }
 
- function requestGeneralChart(uid, date1, date2, dataType) {
+ function requestGeneralChart(uid, date1, date2, dataType, t) {
     $.ajax({
          url: "http://localhost:8080/Devemeter/GetGeneralData",
          type: "POST",
@@ -71,12 +71,20 @@ function trendJsonConversion(str) {
          success: function(data) {
            var dp=[];
            dp=jsonConversion(data);
-           console.log(dp);
+           var max=100;
+           if (t=="Week")
+        	   max=500;
+           else if (t=="Month")
+        	   max=1000;
+           var titleText="Lines of code written in a "+t;
            genChart = new CanvasJS.Chart("generalChart",
                 {
         	   	  animationEnabled:true,
                   axisY: {
-                    maximum: 20
+                    maximum: max
+                  },
+                  title: {
+                	  text: titleText
                   },
                   data: [
                       {
@@ -128,19 +136,24 @@ function trendJsonConversion(str) {
  }
 
  window.onload = function () {
-        requestGeneralChart("1",today, today, "line");
+        requestGeneralChart("1",today, today, "line", "Day");
         requestTrendChart("1", today, today+12, "line");
         //binding tasks
+        $(".about-section").css("padding-top", "50px");
+        $(".contact-section").css("padding-top", "50px");
+        $(".contact-section").css("margin-top", "120px");
+        $(".contact-section").css("margin-bottom", "700px");
+        
         $("#gen_day").click(function(){
-                requestGeneralChart("1",today, today, "line");
+                requestGeneralChart("1",today, today, "line", "Day");
         });
 
         $("#gen_week").click(function(){
-                requestGeneralChart("1",lweek, today, "line");
+                requestGeneralChart("1",lweek, today, "line", "Week");
         });
 
         $("#gen_month").click(function(){
-                requestGeneralChart("1",lmonth, today, "line");
+                requestGeneralChart("1",lmonth, today, "line", "Month");
         });
         
         $("#genSwitch").click(function(){
