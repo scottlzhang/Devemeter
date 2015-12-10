@@ -36,13 +36,13 @@ public class GetTrendData extends HttpServlet {
 		DbHandler db=new DbHandler();
 		String json="{\"uid\":\""+uid+"\",\"trend\":{";
 		int[] lang_codes=db.getLanguages(uid);
-		lang_codes=new int[]{1,2,3};
+		//lang_codes=new int[]{1,2,3};
 		for (int i=0; i<lang_codes.length; i++) {
 			String[] lineCounts;
 			int lang_code=lang_codes[i];
 			if (date1<date2) {
-				//lineCount=db.getLineCount(uid, lang_code, date1, date2);
-				lineCounts=new String[]{"\"151205\":"+rNum(),"\"151208\":"+rNum(),"\"151210\":"+rNum(),"\"151211\":"+rNum()};
+				lineCounts=db.getLineCount(uid, lang_code, date1, date2);
+				//lineCounts=new String[]{"\"151205\":"+rNum(),"\"151208\":"+rNum(),"\"151210\":"+rNum(),"\"151211\":"+rNum()};
 			} else {
 				return "invalid dates";
 			}

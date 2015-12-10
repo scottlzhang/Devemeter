@@ -91,6 +91,7 @@ public class KeyHandler extends HttpServlet {
 		} else if (key.equals("backspace")) {
 			db.removeLine(uid, lang_code, today, lineErased);
 		}
+		//db.getLineTrend(uid, lang_code, 151201,1512);
 		GetGeneralData d=new GetGeneralData();
 		WsHandler.pushMsg(d.getData(uid, today, today));
 		//clients=ws.clients;
