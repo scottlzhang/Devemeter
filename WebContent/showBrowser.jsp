@@ -42,6 +42,9 @@
     		font-size:20px;
     		cursor:pointer;
     	}
+    	#sidebar-wrapper a {
+    		cursor:pointer;
+    	}
     </style>
 
 </head>
@@ -60,19 +63,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">Zhang, Likai - Scott</a>
+                    <a id="zlk">Zhang, Likai - Scott</a>
                 </li>
                 <li>
-                    <a href="#">Wen, Wanqing - Ellen</a>
+                    <a id="wwq">Wen, Wanqing - Ellen</a>
                 </li>
                 <li>
-                    <a href="#">Liyanage, Bhakthi</a>
+                    <a id="u3">Liyanage, Bhakthi</a>
                 </li>
                 <li>
-                    <a href="#">Diwan, Chirayu</a>
+                    <a id="u4">Diwan, Chirayu</a>
                 </li>
                 <li>
-                    <a href="#">Shaikh, Faiz</a>
+                    <a id="u5">Shaikh, Faiz</a>
                 </li>
             </ul>
         </div>
@@ -134,7 +137,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1>General</h1>
-                        <button id="genSwitch">Switch Chart</button>
+                        <button id="genSwitch" style="display:block;margin-bottom:20px"]>Switch Chart</button>
        <div id="generalChart" style="height: 600px; width: 100%; display:block"></div>
        <div class="range-btn">
 	       <a id="gen_day">1 day</a><span> | </span>

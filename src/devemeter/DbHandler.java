@@ -20,7 +20,6 @@ public class DbHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch(Exception e){
-		      //Handle errors for Class.forName
 		      e.printStackTrace();
 		}
 	}
@@ -40,7 +39,6 @@ public class DbHandler {
 			e.printStackTrace();
 			return -1;
 		} catch(Exception e){
-		      //Handle errors for Class.forName
 		      e.printStackTrace();
 		      return -1;
 		}
@@ -61,7 +59,6 @@ public class DbHandler {
 			e.printStackTrace();
 			return -1;
 		} catch(Exception e){
-		      //Handle errors for Class.forName
 		      e.printStackTrace();
 		      return -1;
 		}
@@ -86,7 +83,6 @@ public class DbHandler {
 			e.printStackTrace();
 			return -1;
 		} catch(Exception e){
-		      //Handle errors for Class.forName
 		      e.printStackTrace();
 		      return -1;
 		}
@@ -112,9 +108,36 @@ public class DbHandler {
 			e.printStackTrace();
 			return -1;
 		} catch(Exception e){
-		      //Handle errors for Class.forName
 		      e.printStackTrace();
 		      return -1;
+		}
+	}
+	
+	public String getLineTrend(int uid, int lang_code, int start_date, int end_date){
+		try {
+			stmt=conn.createStatement();
+			String sql="SELECT date,line_count from userlog WHERE uid=? AND lang_code=? AND date>=? AND date<=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			pstmt.setInt(2, lang_code);
+			pstmt.setInt(3, start_date);
+			pstmt.setInt(4, end_date);
+			ResultSet result=pstmt.executeQuery();
+			StringBuilder sb=new StringBuilder();
+			sb.append("{");
+			while(result.next()){
+				sb.append("\""+result.getInt(1)+"\""+":");
+				sb.append(result.getInt(2)+",");
+			}
+			System.out.println(sb.toString().substring(0, sb.length()-1)+"}");
+			return sb.toString().substring(0, sb.length()-1)+"}";
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "";
+		} catch(Exception e){
+		      e.printStackTrace();
+		      return "";
 		}
 	}
 	
@@ -137,7 +160,6 @@ public class DbHandler {
 			e.printStackTrace();
 			return -1;
 		} catch(Exception e){
-		      //Handle errors for Class.forName
 		      e.printStackTrace();
 		      return -1;
 		}
@@ -163,7 +185,6 @@ public class DbHandler {
 			e.printStackTrace();
 			return -1;
 		} catch(Exception e){
-		      //Handle errors for Class.forName
 		      e.printStackTrace();
 		      return -1;
 		}
@@ -190,7 +211,6 @@ public class DbHandler {
 			e.printStackTrace();
 			return new int[0];
 		} catch(Exception e){
-		      //Handle errors for Class.forName
 		      e.printStackTrace();
 		      return new int[0];
 		}

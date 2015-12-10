@@ -16,7 +16,7 @@ var ws = new WebSocket("ws://localhost:8080/Devemeter/WsHandler");
    };
 
       ws.onmessage = function(message) {
-    	document.getElementById("msgArea").textContent += message.data + "\n";
+    	//document.getElementById("msgArea").textContent += message.data + "\n";
     	if (typeof(genChart) !="undefined") {
     		genChart.options.data[0].dataPoints=jsonConversion(message.data);
     		genChart.render();
@@ -137,7 +137,7 @@ function trendJsonConversion(str) {
 
  window.onload = function () {
         requestGeneralChart("1",today, today, "line", "Day");
-        requestTrendChart("1", today, today+12, "line");
+        requestTrendChart("1", today-12, today, "line");
         //binding tasks
         $(".about-section").css("padding-top", "50px");
         $(".contact-section").css("padding-top", "50px");
@@ -171,6 +171,31 @@ function trendJsonConversion(str) {
         	min:0,
         	max:100,
         	title: "Productivity Index"
+        })
+        
+        $("#zlk").click(function(){
+        	requestGeneralChart("1",today, today, "line", "Day");
+        	requestTrendChart("1", today-12, today, "line");
+        });
+        
+        $("#wwq").click(function(){
+        	requestGeneralChart("2",today, today, "line", "Day");
+        	requestTrendChart("2", today-12, today, "line");
+        })
+        
+        $("#u3").click(function(){
+        	requestGeneralChart("3",today, today, "line", "Day");
+        	requestTrendChart("3", today-12, today, "line");
+        })
+        
+        $("#u4").click(function(){
+        	requestGeneralChart("4",today, today, "line", "Day");
+        	requestTrendChart("4", today-12, today, "line");
+        })
+        
+        $("#u5").click(function(){
+        	requestGeneralChart("5",today, today, "line", "Day");
+        	requestTrendChart("5", today-12, today, "line");
         })
         
 }

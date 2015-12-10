@@ -36,17 +36,20 @@ public class GetTrendData extends HttpServlet {
 		DbHandler db=new DbHandler();
 		String json="{\"uid\":\""+uid+"\",\"trend\":{";
 		int[] lang_codes=db.getLanguages(uid);
-		lang_codes=new int[]{1,2,3};
+		//lang_codes=new int[]{1,2,3};
 		for (int i=0; i<lang_codes.length; i++) {
-			String[] lineCounts;
+			String lineCounts;
 			int lang_code=lang_codes[i];
 			if (date1<date2) {
-				//lineCount=db.getLineCount(uid, lang_code, date1, date2);
-				lineCounts=new String[]{"\"151205\":"+rNum(),"\"151208\":"+rNum(),"\"151210\":"+rNum(),"\"151211\":"+rNum()};
+				lineCounts=db.getLineTrend(uid, lang_code, 2016, date2);
+				//lineCounts=new String[]{"\"151205\":"+rNum(),"\"151208\":"+rNum(),"\"151210\":"+rNum(),"\"151211\":"+rNum()};
 			} else {
 				return "invalid dates";
 			}
-			json=json+"\""+lang_code+"\":{";
+			json=json+"\""+lang_code+"\":"+lineCounts;
+			if (i!=lang_codes.length-1)
+				json=json+",";
+			/*
 			for (int j=0; j<lineCounts.length; j++) { 
 				if (j!=lineCounts.length-1) {
 					json=json+lineCounts[j]+",";
@@ -58,9 +61,9 @@ public class GetTrendData extends HttpServlet {
 				json=json+",";
 			} else {
 				json=json+"}";
-			}
+			}*/
 		}
-		json=json+"}";
+		json=json+"}}";
 		return json;
 	}
     
