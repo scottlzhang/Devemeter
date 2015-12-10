@@ -41,7 +41,7 @@ public class GetTrendData extends HttpServlet {
 			String lineCounts;
 			int lang_code=lang_codes[i];
 			if (date1<date2) {
-				lineCounts=db.getLineTrend(uid, lang_code, 2016, date2);
+				lineCounts=db.getLineTrend(uid, lang_code, date1, date2);
 				//lineCounts=new String[]{"\"151205\":"+rNum(),"\"151208\":"+rNum(),"\"151210\":"+rNum(),"\"151211\":"+rNum()};
 			} else {
 				return "invalid dates";
