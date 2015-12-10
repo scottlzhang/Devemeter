@@ -69,6 +69,7 @@ public class KeyHandler extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		/*
 		int uid=Integer.parseInt(request.getParameter("uid"));
 		String key=request.getParameter("key");
 		String ftype=request.getParameter("ftype");
@@ -77,7 +78,7 @@ public class KeyHandler extends HttpServlet {
 		if (le!=null) {
 			lineErased=Integer.parseInt(request.getParameter("lineErased"));
 		}
-		int lang_code=getLangCode(ftype);
+		int lang_code=getLangCode(ftype);*/
 		//response.getWriter().write(key+" received! Got it! Lang code: "+);
 		
 		count++;
@@ -86,14 +87,14 @@ public class KeyHandler extends HttpServlet {
 		//System.out.println(list);
 		
 		//WsHandler ws=new WsHandler();
-		if (key.equals("enter")) {
+		/*if (key.equals("enter")) {
 			db.addLine(uid, lang_code, today);
 		} else if (key.equals("backspace")) {
 			db.removeLine(uid, lang_code, today, lineErased);
-		}
-		//db.getLineTrend(uid, lang_code, 151201,1512);
-		GetGeneralData d=new GetGeneralData();
-		WsHandler.pushMsg(d.getData(uid, today, today));
+		}*/
+		System.out.println(db.getAllUsers());
+		/*GetGeneralData d=new GetGeneralData();
+		WsHandler.pushMsg(d.getData(uid, today, today));*/
 		//clients=ws.clients;
 		//for (String key: ws.clients)
 		

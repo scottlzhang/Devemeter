@@ -141,6 +141,32 @@ public class DbHandler {
 		}
 	}
 	
+	public String getAllUsers(){
+		try {
+			stmt=conn.createStatement();
+			String sql="SELECT uid,sum(line_count) from userlog WHERE date=? GROUP BY uid";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, 151211);
+
+			ResultSet result=pstmt.executeQuery();
+			StringBuilder sb=new StringBuilder();
+			sb.append("{");
+			while(result.next()){
+				sb.append("\""+result.getInt(1)+"\""+":");
+				sb.append(result.getInt(2)+",");
+			}
+			System.out.println(sb.toString().substring(0, sb.length()-1)+"}");
+			return sb.toString().substring(0, sb.length()-1)+"}";
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "";
+		} catch(Exception e){
+		    e.printStackTrace();
+		    return "";
+		}
+	}
+	
 	public int getWordCount(int uid, int lang_code, int date){
 		try {
 			stmt=conn.createStatement();
@@ -215,5 +241,7 @@ public class DbHandler {
 		      return new int[0];
 		}
 	}
+	
+	
 
 }
