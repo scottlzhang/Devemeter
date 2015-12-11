@@ -136,7 +136,7 @@
 		<div id='spinner' style="position:fixed;margin-top:26%; margin-left:35%; z-index:10; display:none"><img src="spinner.gif" alt="waiting..." ></div>
 		
         <!-- Intro Section -->
-        <section id="intro" class="intro-section">
+        <section id="intro" class="intro-section" style="display:none">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -147,7 +147,7 @@
         </section>
 		
         <!-- About Section -->
-        <section id="about" class="about-section">
+        <section id="about" class="about-section" style="padding-top:130px">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">

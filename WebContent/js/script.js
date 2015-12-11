@@ -13,9 +13,9 @@ lang_mapping={"1":"Java",
 name_mapping={
 		"1":"Scott Zhang",
 		"2":"Ellen Wen",
-		"3":"Patel",
-		"4":"Joe Smith",
-		"5":"James Bond"
+		"3":"Johnnie Norton",
+		"4":"Josh Koch",
+		"5":"Emilia Lepisto"
 }
 
 var ws = new WebSocket("ws://localhost:8080/Devemeter/WsHandler");
@@ -227,7 +227,7 @@ function leaderboardJsonConversion(str) {
         requestGeneralChart("1",today, today, "line", "Day");
         requestTrendChart("1", today-5, today, "line");
         //binding tasks
-        $(".about-section").css("padding-top", "50px");
+        $(".about-section").css("padding-top", "130px");
         $(".contact-section").css("padding-top", "50px");
         $(".contact-section").css("margin-top", "120px");
         $(".contact-section").css("margin-bottom", "700px");
