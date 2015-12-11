@@ -45,6 +45,16 @@
     	#sidebar-wrapper a {
     		cursor:pointer;
     	}
+    	
+    	.profile-pic {
+    		float:left;
+    		margin-left:15px;
+    		margin-top:5px;
+    	}
+    	
+    	.sidebar-nav li {
+    		line-height:50px;
+    	}
     </style>
 
 </head>
@@ -63,19 +73,23 @@
                     </a>
                 </li>
                 <li>
-                    <a id="zlk">Zhang, Likai - Scott</a>
+                    <a id="zlk"><img class="profile-pic" src="pic/p1.png" width="40px"></img>Scott Zhang</a>
+                    
                 </li>
                 <li>
-                    <a id="wwq">Wen, Wanqing - Ellen</a>
+                    <a id="wwq">Ellen Wen<img class="profile-pic" src="pic/p2.png" width="40px"></img></a>
                 </li>
                 <li>
-                    <a id="u3">Liyanage, Bhakthi</a>
+                    <a id="u3">Johnnie Norton<img class="profile-pic" src="pic/p3.jpg" width="40px"></img></a>
                 </li>
                 <li>
-                    <a id="u4">Diwan, Chirayu</a>
+                    <a id="u4">Josh Koch<img class="profile-pic" src="pic/p4.jpg" width="40px"></a>
                 </li>
                 <li>
-                    <a id="u5">Shaikh, Faiz</a>
+                    <a id="u5">Emilia Lepisto<img class="profile-pic" src="pic/p5.jpg" width="40px"></a>
+                </li>
+                <li>
+                	<a id="leaderboard">Leaderboard</a>
                 </li>
             </ul>
         </div>
@@ -118,27 +132,27 @@
                 </div>
             <!-- /.container -->
             </nav>
-
+            
+		<div id='spinner' style="position:fixed;margin-top:26%; margin-left:35%; z-index:10; display:none"><img src="spinner.gif" alt="waiting..." ></div>
+		
         <!-- Intro Section -->
         <section id="intro" class="intro-section">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Scrolling Nav</h1>
-                        <a class="btn btn-default page-scroll" href="#about">Click Me to Scroll Down!</a>
+                        <div id="leadChart" style="width:70%"></div>
                     </div>
                 </div>
             </div>
         </section>
-
+		
         <!-- About Section -->
         <section id="about" class="about-section">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>General</h1>
                         <button id="genSwitch" style="display:block;margin-bottom:20px"]>Switch Chart</button>
-       <div id="generalChart" style="height: 600px; width: 100%; display:block"></div>
+       <div id="generalChart" style="height: 600px; width: 80%; display:block"></div>
        <div class="range-btn">
 	       <a id="gen_day">1 day</a><span> | </span>
 	       <a id="gen_week">1 week</a><span> | </span>
@@ -155,7 +169,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1>Trend</h1>
-                          <div id="trendChart" style="height: 500px; width: 100%; display:block"></div>
+                          <div id="trendChart" style="height: 500px; width: 80%; display:block"></div>
        <div class="range-btn">
 	       <a id="trend_week">Week</a><span> | </span>
 	       <a id="trend_month">Month</a><span> | </span>

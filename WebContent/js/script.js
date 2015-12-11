@@ -10,6 +10,13 @@ lang_mapping={"1":"Java",
 		 		"7":"CSS",
 		 		"8":"C",
 		 		"9":"CPP"};
+name_mapping={
+		"1":"Scott Zhang",
+		"2":"Ellen Wen",
+		"3":"Patel",
+		"4":"Joe Smith",
+		"5":"James Bond"
+}
 
 var ws = new WebSocket("ws://localhost:8080/Devemeter/WsHandler");
    ws.onopen = function () {
@@ -63,11 +70,31 @@ function trendJsonConversion(str) {
 	return lineData;
 }
 
+function leaderboardJsonConversion(str) {
+	var data=JSON.parse(str);
+	var dp=[]
+	for (var uid in data) {
+		var name=name_mapping[uid];
+		var num=data[uid];
+		dp.push({y:num, indexLabel:name});
+	}
+	dp.sort(function(a,b) {
+		return a.y-b.y;
+	})
+	for (var i=0; i<dp.length; i++) {
+		dp[i]["label"]=dp.length-i;
+	}
+	return dp;
+}
+
  function requestGeneralChart(uid, date1, date2, dataType, t) {
     $.ajax({
          url: "http://localhost:8080/Devemeter/GetGeneralData",
          type: "POST",
          data: {"uid":uid, "date1":date1, "date2":date2, "dataType":dataType},
+         beforeSend: function() {
+        	 $("#spinner").show();
+         },
          success: function(data) {
            var dp=[];
            dp=jsonConversion(data);
@@ -95,6 +122,7 @@ function trendJsonConversion(str) {
                 });
 
             genChart.render();
+            $("#spinner").hide();
          },
          error: function() {
            alert("error ");
@@ -110,7 +138,7 @@ function trendJsonConversion(str) {
 	         success: function(data) {
 	           var chartData=[];
 	           chartData=trendJsonConversion(data);
-	           console.log(chartData);
+	           //console.log(chartData);
 	           trendChart = new CanvasJS.Chart("trendChart",
 	                {
 	        	   	  animationEnabled:true,
@@ -134,10 +162,70 @@ function trendJsonConversion(str) {
 	         }
 	        });
  }
+ 
+ function requestLeaderboardChart() {
+	 $.ajax({
+		 url: "http://localhost:8080/Devemeter/GetLeadershipData",
+		 type: "GET",
+		 success: function(data) {
+			 var leadData=leaderboardJsonConversion(data);
+			 
+			 leadChart=new CanvasJS.Chart("leadChart", {
+				title: {
+					text: "Leaderboard",
+					fontSize: 28,
+					margin: 30
+				},
+				animationEnabled: true,
+				 axisY: {
+		                tickThickness: 0,
+		                lineThickness: 0,
+		                labelFontSize:30,
+		                valueFormatString: " ",
+		                gridThickness: 0                    
+		            },
+		            axisX: {
+		                tickThickness: 0,
+		                lineThickness: 0,
+		                labelFontSize: 30,
+		                labelFontColor: "Peru"
 
+		            },
+				data: [{
+				       indexLabelFontSize:23,
+				       toolTipContent: "<span style='\"'color: {color};'\"'><strong>{indexLabel}</strong></span><span style='\"'font-size: 20px; color:peru '\"'><strong>{y}</strong></span>",
+
+				       indexLabelPlacement: "inside",
+		               indexLabelFontColor: "white",
+		               indexLabelFontWeight: 600,
+		               indexLabelFontFamily: "Verdana",
+		               color: "#62C9C3",
+		               type: "bar",
+		               dataPoints:leadData
+				}]
+			 });
+			 leadChart.render();
+		 }
+	 })
+ }
+
+ function showLead() {
+	$("#intro").show();
+	$("#about").hide();
+ 	$("#services").hide();
+ 	$("#contact").hide();
+ }
+ 
+ function hideLead() {
+	 $("#intro").hide();
+	 $("#about").show();
+	 $("#services").show();
+	 $("#contact").show();
+ }
+ 
  window.onload = function () {
         requestGeneralChart("1",today, today, "line", "Day");
-        requestTrendChart("1", today-12, today, "line");
+        requestTrendChart("1", today-5, today, "line");
         //binding tasks
         $(".about-section").css("padding-top", "50px");
         $(".contact-section").css("padding-top", "50px");
@@ -156,6 +244,18 @@ function trendJsonConversion(str) {
                 requestGeneralChart("1",lmonth, today, "line", "Month");
         });
         
+        $("trend_week").click(function(){
+        	requestTrendChart("1", today-5, today, "line");
+        });
+        
+        $("#trend_month").click(function(){
+        	requestTrendChart("1", 151111, today, "line");
+        });
+        
+        $("#trend_year").click(function(){
+        	requestTrendChart("1", 141211, today, "line");
+        });
+        
         $("#genSwitch").click(function(){
         	if (genChart.options.data[0].type=="pie") {
         		genChart.options.data[0].type="column";
@@ -171,32 +271,43 @@ function trendJsonConversion(str) {
         	min:0,
         	max:100,
         	title: "Productivity Index"
-        })
+        });
         
         $("#zlk").click(function(){
         	requestGeneralChart("1",today, today, "line", "Day");
         	requestTrendChart("1", today-12, today, "line");
+        	hideLead();
         });
         
         $("#wwq").click(function(){
         	requestGeneralChart("2",today, today, "line", "Day");
         	requestTrendChart("2", today-12, today, "line");
+        	hideLead();
         })
         
         $("#u3").click(function(){
         	requestGeneralChart("3",today, today, "line", "Day");
         	requestTrendChart("3", today-12, today, "line");
-        })
+        	hideLead();
+        });
         
         $("#u4").click(function(){
         	requestGeneralChart("4",today, today, "line", "Day");
         	requestTrendChart("4", today-12, today, "line");
-        })
+        });
         
         $("#u5").click(function(){
         	requestGeneralChart("5",today, today, "line", "Day");
         	requestTrendChart("5", today-12, today, "line");
-        })
+        });
+        
+        $("#leaderboard").click(function(){
+        	showLead();
+        	
+        	requestLeaderboardChart();
+        });
+        
+        
         
 }
 

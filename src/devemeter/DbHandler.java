@@ -28,6 +28,7 @@ public class DbHandler {
 		try {
 			stmt=conn.createStatement();
 			String sql="UPDATE userlog SET line_count=line_count+1 WHERE uid=? AND lang_code=? AND date=?";
+			System.out.println(sql);
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, uid);
 			pstmt.setInt(2, lang_code);
