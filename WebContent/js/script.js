@@ -245,14 +245,17 @@ function leaderboardJsonConversion(str) {
         });
         
         $("trend_week").click(function(){
+        	$("#trend_title").html("Weekly Trend");
         	requestTrendChart("1", today-5, today, "line");
         });
         
         $("#trend_month").click(function(){
+        	$("#trend_title").html("Monthly Trend");
         	requestTrendChart("1", 151111, today, "line");
         });
         
         $("#trend_year").click(function(){
+        	$("#trend_title").html("Yearly Trend");
         	requestTrendChart("1", 141211, today, "line");
         });
         

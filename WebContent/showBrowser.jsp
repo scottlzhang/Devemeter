@@ -118,7 +118,7 @@
                                 <a class="page-scroll" href="#page-top"></a>
                             </li>
                             <li>
-                                <a class="page-scroll" href="#about">General</a>
+                                <a class="page-scroll" href="#about">Overview</a>
                             </li>
                             <li>
                                 <a class="page-scroll" href="#services">Trend</a>
@@ -168,7 +168,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Trend</h1>
+                        <h1 id="trend_title" style="margin-left:-180px">Weekly Trend</h1>
                           <div id="trendChart" style="height: 500px; width: 80%; display:block"></div>
        <div class="range-btn">
 	       <a id="trend_week">Week</a><span> | </span>
